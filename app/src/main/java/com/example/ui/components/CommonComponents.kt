@@ -35,8 +35,8 @@ fun DisclaimerBanner(
             .fillMaxWidth()
             .testTag("disclaimer_banner"),
         shape = RoundedCornerShape(12.dp),
-        color = NutriAmberLight.copy(alpha = 0.85f),
-        border = androidx.compose.foundation.BorderStroke(1.dp, NutriAmber.copy(alpha = 0.4f))
+        color = NutriAmberLight,
+        border = androidx.compose.foundation.BorderStroke(1.dp, NutriAmberDark.copy(alpha = 0.5f))
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -45,14 +45,15 @@ fun DisclaimerBanner(
             Icon(
                 imageVector = Icons.Default.Info,
                 contentDescription = "Pemberitahuan",
-                tint = NutriAmber,
+                tint = NutriAmberDark,
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodySmall,
-                color = NutriSlate800,
+                color = NutriSlate900,
+                fontWeight = FontWeight.Medium,
                 fontSize = 12.sp,
                 lineHeight = 16.sp
             )
@@ -64,7 +65,7 @@ fun DisclaimerBanner(
 fun RiskBadge(riskCategory: String, modifier: Modifier = Modifier) {
     val (bgColor, textColor, icon) = when (riskCategory) {
         "Risiko Rendah" -> Triple(NutriGreenLight, NutriGreenDark, Icons.Default.CheckCircle)
-        "Perlu Perhatian" -> Triple(NutriYellowLight, Color(0xFF854D0E), Icons.Default.Warning)
+        "Perlu Perhatian" -> Triple(NutriYellowLight, NutriYellowRisk, Icons.Default.Warning)
         else -> Triple(NutriRedLight, NutriRedRisk, Icons.Default.Error)
     }
 
@@ -88,7 +89,7 @@ fun RiskBadge(riskCategory: String, modifier: Modifier = Modifier) {
                 text = riskCategory,
                 color = textColor,
                 fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.Bold
             )
         }
     }
@@ -118,7 +119,8 @@ fun NutriTopAppBar(
                     Text(
                         text = subtitle,
                         style = MaterialTheme.typography.bodySmall,
-                        color = NutriSlate600,
+                        color = NutriSlate700,
+                        fontWeight = FontWeight.Medium,
                         fontSize = 11.sp
                     )
                 }
@@ -147,7 +149,7 @@ fun NutriTopAppBar(
                     Icon(
                         imageVector = Icons.Default.AutoAwesome,
                         contentDescription = "Tanya NutriMind AI",
-                        tint = NutriAmber
+                        tint = NutriAmberDark
                     )
                 }
             }
@@ -159,7 +161,7 @@ fun NutriTopAppBar(
                     Icon(
                         imageVector = Icons.Default.Logout,
                         contentDescription = "Keluar",
-                        tint = NutriSlate600
+                        tint = NutriSlate700
                     )
                 }
             }
@@ -210,15 +212,15 @@ fun NutriBottomNavigation(
                     Text(
                         text = item.label,
                         fontSize = 10.sp,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = NutriGreenDark,
                     selectedTextColor = NutriGreenDark,
                     indicatorColor = NutriGreenLight,
-                    unselectedIconColor = NutriSlate600,
-                    unselectedTextColor = NutriSlate600
+                    unselectedIconColor = NutriSlate700,
+                    unselectedTextColor = NutriSlate700
                 )
             )
         }

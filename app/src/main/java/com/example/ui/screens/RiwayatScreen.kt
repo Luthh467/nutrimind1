@@ -73,17 +73,17 @@ fun RiwayatScreen(
                 Tab(
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
-                    text = { Text("Cek Gizi", fontSize = 12.sp, fontWeight = FontWeight.Bold) }
+                    text = { Text("Cek Gizi", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = if (selectedTab == 0) NutriGreenDark else NutriSlate700) }
                 )
                 Tab(
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
-                    text = { Text("Harian", fontSize = 12.sp, fontWeight = FontWeight.Bold) }
+                    text = { Text("Harian", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = if (selectedTab == 1) NutriGreenDark else NutriSlate700) }
                 )
                 Tab(
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 },
-                    text = { Text("Foto Makanan", fontSize = 12.sp, fontWeight = FontWeight.Bold) }
+                    text = { Text("Foto Makanan", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = if (selectedTab == 2) NutriGreenDark else NutriSlate700) }
                 )
             }
 
@@ -125,13 +125,14 @@ fun RiwayatScreen(
                                     Text(
                                         text = "Saat ini: ${latest.weightKg} kg (TB: ${latest.heightCm} cm) • IMT: ${latest.bmi} kg/m²",
                                         fontSize = 12.sp,
-                                        fontWeight = FontWeight.SemiBold,
-                                        color = NutriSlate800
+                                        fontWeight = FontWeight.Bold,
+                                        color = NutriSlate900
                                     )
                                     Text(
                                         text = "Status: ${latest.bmiCategory} • Kategori: ${latest.riskCategory}",
                                         fontSize = 11.sp,
-                                        color = NutriSlate600
+                                        fontWeight = FontWeight.Medium,
+                                        color = NutriSlate800
                                     )
                                 }
                             }
@@ -142,13 +143,28 @@ fun RiwayatScreen(
                     item {
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             items(listOf("Semua", "Risiko Rendah", "Perlu Perhatian", "Risiko Tinggi")) { rf ->
+                                val isSel = selectedRiskFilter == rf
                                 FilterChip(
-                                    selected = selectedRiskFilter == rf,
+                                    selected = isSel,
                                     onClick = { selectedRiskFilter = rf },
-                                    label = { Text(rf, fontSize = 11.sp) },
+                                    label = {
+                                        Text(
+                                            text = rf,
+                                            fontSize = 11.sp,
+                                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                            color = if (isSel) NutriGreenDark else NutriSlate800
+                                        )
+                                    },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = NutriGreenLight,
-                                        selectedLabelColor = NutriGreenDark
+                                        selectedLabelColor = NutriGreenDark,
+                                        containerColor = NutriSlate50,
+                                        labelColor = NutriSlate800
+                                    ),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSel,
+                                        borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                                     )
                                 )
                             }
@@ -163,7 +179,7 @@ fun RiwayatScreen(
                                     .padding(vertical = 30.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text("Belum ada riwayat cek gizi tercatat.", color = NutriSlate400, fontSize = 13.sp)
+                                Text("Belum ada riwayat cek gizi tercatat.", color = NutriSlate700, fontWeight = FontWeight.Medium, fontSize = 13.sp)
                             }
                         }
                     } else {
@@ -195,8 +211,8 @@ fun RiwayatScreen(
                                         modifier = Modifier.fillMaxWidth(),
                                         horizontalArrangement = Arrangement.SpaceBetween
                                     ) {
-                                        Text(text = "BB: ${check.weightKg} kg | TB: ${check.heightCm} cm", fontSize = 12.sp, color = NutriSlate700)
-                                        Text(text = "IMT: ${check.bmi} (${check.bmiCategory})", fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = NutriGreenDark)
+                                        Text(text = "BB: ${check.weightKg} kg | TB: ${check.heightCm} cm", fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
+                                        Text(text = "IMT: ${check.bmi} (${check.bmiCategory})", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = NutriGreenDark)
                                     }
 
                                     Text(
@@ -211,7 +227,8 @@ fun RiwayatScreen(
                                     Text(
                                         text = "Catatan: ${check.factorsToNote}",
                                         fontSize = 11.sp,
-                                        color = NutriSlate600,
+                                        fontWeight = FontWeight.Medium,
+                                        color = NutriSlate800,
                                         lineHeight = 15.sp
                                     )
                                 }
@@ -230,7 +247,7 @@ fun RiwayatScreen(
                                     .padding(vertical = 30.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text("Belum ada catatan cek kesehatan harian.", color = NutriSlate400, fontSize = 13.sp)
+                                Text("Belum ada catatan cek kesehatan harian.", color = NutriSlate700, fontWeight = FontWeight.Medium, fontSize = 13.sp)
                             }
                         }
                     } else {
@@ -254,19 +271,20 @@ fun RiwayatScreen(
                                             Text(
                                                 text = daily.bodyCondition,
                                                 fontSize = 11.sp,
-                                                fontWeight = FontWeight.SemiBold,
+                                                fontWeight = FontWeight.Bold,
                                                 color = NutriTealDark,
                                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                                             )
                                         }
                                     }
 
-                                    Text(text = daily.summaryText, fontSize = 11.sp, color = NutriSlate700)
+                                    Text(text = daily.summaryText, fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
 
                                     if (daily.bmr > 0f || daily.tdee > 0f) {
                                         Surface(
                                             shape = RoundedCornerShape(8.dp),
                                             color = NutriSlate100,
+                                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200),
                                             modifier = Modifier.fillMaxWidth()
                                         ) {
                                             Row(
@@ -288,7 +306,8 @@ fun RiwayatScreen(
                                                 Text(
                                                     text = daily.activityLevel.ifEmpty { "Aktivitas Harian" },
                                                     fontSize = 10.sp,
-                                                    color = NutriSlate600
+                                                    fontWeight = FontWeight.SemiBold,
+                                                    color = NutriSlate700
                                                 )
                                             }
                                         }
@@ -298,11 +317,13 @@ fun RiwayatScreen(
                                         Surface(
                                             shape = RoundedCornerShape(8.dp),
                                             color = NutriGreenSuperLight,
+                                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriGreenPrimary.copy(alpha = 0.3f)),
                                             modifier = Modifier.fillMaxWidth()
                                         ) {
                                             Text(
                                                 text = "Saran AI: ${daily.aiAdvice}",
                                                 fontSize = 11.sp,
+                                                fontWeight = FontWeight.Medium,
                                                 color = NutriGreenDark,
                                                 modifier = Modifier.padding(8.dp),
                                                 lineHeight = 15.sp
@@ -325,7 +346,7 @@ fun RiwayatScreen(
                                     .padding(vertical = 30.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text("Belum ada foto makanan yang disimpan ke riwayat.", color = NutriSlate400, fontSize = 13.sp)
+                                Text("Belum ada foto makanan yang disimpan ke riwayat.", color = NutriSlate700, fontWeight = FontWeight.Medium, fontSize = 13.sp)
                             }
                         }
                     } else {
@@ -345,12 +366,12 @@ fun RiwayatScreen(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(text = log.foodName, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = NutriGreenDark)
-                                        Text(text = log.estimatedCalories, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = NutriAmber)
+                                        Text(text = log.estimatedCalories, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, color = NutriAmberDark)
                                     }
-                                    Text(text = log.date, fontSize = 10.sp, color = NutriSlate400)
-                                    Text(text = "Komponen: ${log.detectedItems}", fontSize = 11.sp, color = NutriSlate700)
-                                    Text(text = "Piringku: ${log.foodGroups}", fontSize = 11.sp, color = NutriTealDark, fontWeight = FontWeight.Medium)
-                                    Text(text = log.balanceEvaluation, fontSize = 11.sp, color = NutriSlate600, lineHeight = 15.sp)
+                                    Text(text = log.date, fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate700)
+                                    Text(text = "Komponen: ${log.detectedItems}", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
+                                    Text(text = "Piringku: ${log.foodGroups}", fontSize = 11.sp, color = NutriTealDark, fontWeight = FontWeight.SemiBold)
+                                    Text(text = log.balanceEvaluation, fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800, lineHeight = 15.sp)
                                 }
                             }
                         }

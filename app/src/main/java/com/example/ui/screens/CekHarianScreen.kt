@@ -154,7 +154,8 @@ fun CekHarianScreen(
                         Text(
                             text = "Gunakan data fisik harian untuk menghitung kebutuhan kalori tubuh secara akurat.",
                             fontSize = 11.sp,
-                            color = NutriSlate600
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate700
                         )
                     }
                 }
@@ -193,7 +194,8 @@ fun CekHarianScreen(
                                 Text(
                                     text = "Rumus Harris-Benedict yang Diperbarui",
                                     fontSize = 11.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = NutriSlate700
                                 )
                             }
                         }
@@ -222,7 +224,7 @@ fun CekHarianScreen(
                             modifier = Modifier
                                 .weight(1f)
                                 .testTag("bmr_weight_input"),
-                            label = { Text("Berat (kg)") },
+                            label = { Text("Berat (kg)", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
                             singleLine = true
                         )
                         OutlinedTextField(
@@ -231,7 +233,7 @@ fun CekHarianScreen(
                             modifier = Modifier
                                 .weight(1f)
                                 .testTag("bmr_height_input"),
-                            label = { Text("Tinggi (cm)") },
+                            label = { Text("Tinggi (cm)", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
                             singleLine = true
                         )
                     }
@@ -240,8 +242,8 @@ fun CekHarianScreen(
                     Text(
                         text = "Tingkat Aktivitas Fisik Minggu Ini:",
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = NutriSlate800
+                        fontWeight = FontWeight.Bold,
+                        color = NutriSlate900
                     )
 
                     Row(
@@ -254,7 +256,7 @@ fun CekHarianScreen(
                             color = if (isActiveExercise) NutriGreenLight else NutriSlate100,
                             border = BorderStroke(
                                 1.dp,
-                                if (isActiveExercise) NutriGreenPrimary else Color.Transparent
+                                if (isActiveExercise) NutriGreenPrimary else NutriSlate200
                             ),
                             modifier = Modifier
                                 .weight(1f)
@@ -271,7 +273,7 @@ fun CekHarianScreen(
                                         text = "Aktif Olahraga",
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 12.sp,
-                                        color = if (isActiveExercise) NutriGreenDark else NutriSlate800
+                                        color = if (isActiveExercise) NutriGreenDark else NutriSlate900
                                     )
                                     if (isActiveExercise) {
                                         Icon(
@@ -285,7 +287,8 @@ fun CekHarianScreen(
                                 Text(
                                     text = "3–5 kali / minggu",
                                     fontSize = 11.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate700
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
@@ -303,7 +306,7 @@ fun CekHarianScreen(
                             color = if (!isActiveExercise) NutriGreenLight else NutriSlate100,
                             border = BorderStroke(
                                 1.dp,
-                                if (!isActiveExercise) NutriGreenPrimary else Color.Transparent
+                                if (!isActiveExercise) NutriGreenPrimary else NutriSlate200
                             ),
                             modifier = Modifier
                                 .weight(1f)
@@ -320,7 +323,7 @@ fun CekHarianScreen(
                                         text = "Jarang Olahraga",
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 12.sp,
-                                        color = if (!isActiveExercise) NutriGreenDark else NutriSlate800
+                                        color = if (!isActiveExercise) NutriGreenDark else NutriSlate900
                                     )
                                     if (!isActiveExercise) {
                                         Icon(
@@ -334,7 +337,8 @@ fun CekHarianScreen(
                                 Text(
                                     text = "Ringan / santai",
                                     fontSize = 11.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate700
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
@@ -351,6 +355,7 @@ fun CekHarianScreen(
                     Surface(
                         shape = RoundedCornerShape(14.dp),
                         color = NutriTealLight.copy(alpha = 0.35f),
+                        border = BorderStroke(1.dp, NutriTealPrimary.copy(alpha = 0.3f)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(
@@ -366,7 +371,8 @@ fun CekHarianScreen(
                                     Text(
                                         text = "BMR (Energi Basal)",
                                         fontSize = 11.sp,
-                                        color = NutriSlate600
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = NutriSlate700
                                     )
                                     Text(
                                         text = "${bmrValue.toInt()} kkal/hari",
@@ -377,7 +383,8 @@ fun CekHarianScreen(
                                     Text(
                                         text = "Energi minimal saat istirahat",
                                         fontSize = 10.sp,
-                                        color = NutriSlate600
+                                        fontWeight = FontWeight.Medium,
+                                        color = NutriSlate700
                                     )
                                 }
 
@@ -388,7 +395,8 @@ fun CekHarianScreen(
                                     Text(
                                         text = "TDEE (Kebutuhan Total)",
                                         fontSize = 11.sp,
-                                        color = NutriSlate600
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = NutriSlate700
                                     )
                                     Text(
                                         text = "${tdeeResult.tdee.toInt()} kkal/hari",
@@ -399,7 +407,7 @@ fun CekHarianScreen(
                                     Text(
                                         text = "BMR × ${tdeeResult.activityMultiplier}",
                                         fontSize = 10.sp,
-                                        fontWeight = FontWeight.SemiBold,
+                                        fontWeight = FontWeight.Bold,
                                         color = NutriTealDark
                                     )
                                 }
@@ -415,7 +423,8 @@ fun CekHarianScreen(
                                     "Rumus Wanita: BMR = 447,593 + (9,247×${currentWeight}) + (3,098×${currentHeight}) - (4,330×${age})"
                                 },
                                 fontSize = 10.sp,
-                                color = NutriSlate600
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate700
                             )
 
                             // Pembagian Porsi Kalori Rekomendasi Gizi Remaja
@@ -424,21 +433,21 @@ fun CekHarianScreen(
                                     text = "Distribusi Energi Harian (Isi Piringku):",
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = NutriSlate800
+                                    color = NutriSlate900
                                 )
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Sarapan (~25%): ${tdeeResult.mealDistribution.breakfastCalories} kkal", fontSize = 10.sp, color = NutriSlate700)
-                                    Text("Siang (~35%): ${tdeeResult.mealDistribution.lunchCalories} kkal", fontSize = 10.sp, color = NutriSlate700)
+                                    Text("Sarapan (~25%): ${tdeeResult.mealDistribution.breakfastCalories} kkal", fontSize = 10.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
+                                    Text("Siang (~35%): ${tdeeResult.mealDistribution.lunchCalories} kkal", fontSize = 10.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
                                 }
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Text("Malam (~30%): ${tdeeResult.mealDistribution.dinnerCalories} kkal", fontSize = 10.sp, color = NutriSlate700)
-                                    Text("Selingan (~10%): ${tdeeResult.mealDistribution.snackCalories} kkal", fontSize = 10.sp, color = NutriSlate700)
+                                    Text("Malam (~30%): ${tdeeResult.mealDistribution.dinnerCalories} kkal", fontSize = 10.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
+                                    Text("Selingan (~10%): ${tdeeResult.mealDistribution.snackCalories} kkal", fontSize = 10.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
                                 }
                             }
                         }
@@ -658,6 +667,7 @@ fun CekHarianScreen(
                             Surface(
                                 shape = RoundedCornerShape(10.dp),
                                 color = NutriSlate100,
+                                border = BorderStroke(1.dp, NutriSlate200),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Row(
@@ -667,16 +677,16 @@ fun CekHarianScreen(
                                     horizontalArrangement = Arrangement.SpaceAround
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text("BMR (Basal)", fontSize = 11.sp, color = NutriSlate600)
+                                        Text("BMR (Basal)", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate700)
                                         Text("${daily.bmr.toInt()} kkal", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = NutriGreenDark)
                                     }
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text("TDEE (Kebutuhan)", fontSize = 11.sp, color = NutriSlate600)
+                                        Text("TDEE (Kebutuhan)", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate700)
                                         Text("${daily.tdee.toInt()} kkal", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = NutriTealDark)
                                     }
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text("Aktivitas", fontSize = 11.sp, color = NutriSlate600)
-                                        Text(daily.activityLevel.ifEmpty { "1,55" }, fontWeight = FontWeight.Medium, fontSize = 12.sp, color = NutriSlate800)
+                                        Text("Aktivitas", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate700)
+                                        Text(daily.activityLevel.ifEmpty { "1,55" }, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = NutriSlate900)
                                     }
                                 }
                             }
@@ -685,13 +695,15 @@ fun CekHarianScreen(
                         Text(
                             text = daily.summaryText,
                             fontSize = 12.sp,
-                            color = NutriSlate800,
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate900,
                             lineHeight = 17.sp
                         )
 
                         Surface(
                             shape = RoundedCornerShape(12.dp),
                             color = NutriTealLight.copy(alpha = 0.5f),
+                            border = BorderStroke(1.dp, NutriTealPrimary.copy(alpha = 0.3f)),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(12.dp)) {
@@ -714,6 +726,7 @@ fun CekHarianScreen(
                                 Text(
                                     text = daily.aiAdvice,
                                     fontSize = 12.sp,
+                                    fontWeight = FontWeight.Medium,
                                     color = NutriSlate900,
                                     lineHeight = 17.sp
                                 )
@@ -742,7 +755,8 @@ fun CekHarianScreen(
                     Text(
                         text = "Kebutuhan energimu hari ini berhasil dihitung:",
                         fontSize = 12.sp,
-                        color = NutriSlate700
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate800
                     )
                     Text(
                         text = "• BMR: ${bmrValue.toInt()} kkal/hari\n• TDEE: ${tdeeResult.tdee.toInt()} kkal/hari (${if (isActiveExercise) "Aktif 3-5x/minggu [×1,55]" else "Jarang olahraga [×1,20]"})",
@@ -753,7 +767,8 @@ fun CekHarianScreen(
                     Text(
                         text = "Evaluasi gizi harian dan anjuran porsi telah diperbarui oleh NutriMind AI.",
                         fontSize = 12.sp,
-                        color = NutriSlate800
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate900
                     )
                 }
             },
@@ -781,7 +796,7 @@ private fun DailyQuestionItem(
         Text(
             text = "$number. $question",
             fontSize = 12.sp,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
             color = NutriSlate900
         )
         Row(
@@ -793,10 +808,25 @@ private fun DailyQuestionItem(
                 FilterChip(
                     selected = isSel,
                     onClick = { onSelect(opt) },
-                    label = { Text(opt, fontSize = 10.sp, maxLines = 1) },
+                    label = {
+                        Text(
+                            text = opt,
+                            fontSize = 10.sp,
+                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                            color = if (isSel) NutriGreenDark else NutriSlate800,
+                            maxLines = 1
+                        )
+                    },
                     colors = FilterChipDefaults.filterChipColors(
                         selectedContainerColor = NutriGreenLight,
-                        selectedLabelColor = NutriGreenDark
+                        selectedLabelColor = NutriGreenDark,
+                        containerColor = NutriSlate50,
+                        labelColor = NutriSlate800
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        enabled = true,
+                        selected = isSel,
+                        borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                     )
                 )
             }

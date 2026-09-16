@@ -255,8 +255,8 @@ fun BerandaScreen(
                             Text(
                                 text = "Status Gizi",
                                 fontSize = 12.sp,
-                                color = NutriSlate600,
-                                fontWeight = FontWeight.Medium
+                                color = NutriSlate800,
+                                fontWeight = FontWeight.Bold
                             )
                         }
 
@@ -270,32 +270,35 @@ fun BerandaScreen(
                             Text(
                                 text = "IMT: ${latestCheck!!.bmi} kg/m² ${if (latestCheck!!.zScore != 0f) "• ${latestCheck!!.zScore} SD" else ""}",
                                 fontSize = 11.sp,
-                                color = NutriSlate600
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate800
                             )
                             Spacer(modifier = Modifier.height(2.dp))
                             RiskBadge(riskCategory = latestCheck!!.riskCategory)
                             Text(
                                 text = "Standar Kemenkes RI IMT/U",
-                                fontSize = 9.sp,
+                                fontSize = 10.sp,
                                 color = NutriTealDark,
-                                fontWeight = FontWeight.SemiBold
+                                fontWeight = FontWeight.Bold
                             )
                             Text(
                                 text = "Dicek: ${latestCheck!!.date}",
                                 fontSize = 10.sp,
-                                color = NutriSlate400
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate700
                             )
                         } else {
                             Text(
                                 text = "Belum Ada Data",
-                                fontWeight = FontWeight.SemiBold,
+                                fontWeight = FontWeight.Bold,
                                 fontSize = 13.sp,
-                                color = NutriSlate600
+                                color = NutriSlate800
                             )
                             Text(
                                 text = "Lakukan cek gizi pertama kalimu",
                                 fontSize = 11.sp,
-                                color = NutriSlate400
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate700
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Button(
@@ -334,8 +337,8 @@ fun BerandaScreen(
                             Text(
                                 text = "Cek Hari Ini",
                                 fontSize = 12.sp,
-                                color = NutriSlate600,
-                                fontWeight = FontWeight.Medium
+                                color = NutriSlate800,
+                                fontWeight = FontWeight.Bold
                             )
                         }
 
@@ -367,12 +370,13 @@ fun BerandaScreen(
                                 text = "Kondisi: ${todayDailyCheck!!.bodyCondition}",
                                 fontSize = 11.sp,
                                 color = NutriSlate800,
-                                fontWeight = FontWeight.Medium
+                                fontWeight = FontWeight.SemiBold
                             )
                             Text(
                                 text = "Sarapan: ${todayDailyCheck!!.breakfast} • Tidur: ${todayDailyCheck!!.sleepHours}",
-                                fontSize = 10.sp,
-                                color = NutriSlate600
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate800
                             )
                             if (todayDailyCheck!!.tdee > 0f) {
                                 Text(
@@ -394,7 +398,7 @@ fun BerandaScreen(
                                     Icon(
                                         imageVector = Icons.Default.Schedule,
                                         contentDescription = null,
-                                        tint = NutriAmber,
+                                        tint = NutriAmberDark,
                                         modifier = Modifier.size(14.dp)
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
@@ -408,8 +412,9 @@ fun BerandaScreen(
                             }
                             Text(
                                 text = "Hanya butuh 1 menit untuk mencatat kebiasaan sehatmu.",
-                                fontSize = 10.sp,
-                                color = NutriSlate600
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate800
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Button(
@@ -510,8 +515,9 @@ fun BerandaScreen(
                             )
                             Text(
                                 text = "Pedoman Gizi Seimbang Kemenkes RI",
-                                fontSize = 10.sp,
-                                color = NutriSlate600
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = NutriTealDark
                             )
                         }
                     }
@@ -521,7 +527,8 @@ fun BerandaScreen(
                     Text(
                         text = "“Jangan lewatkan sarapan sebelum berangkat ke madrasah. Sarapan bergizi dengan kombinasi karbohidrat kompleks dan protein membantu otak berkonsentrasi optimal selama jam pelajaran berlangsung!”",
                         fontSize = 12.sp,
-                        color = NutriSlate800,
+                        color = NutriSlate900,
+                        fontWeight = FontWeight.Medium,
                         lineHeight = 17.sp
                     )
                 }
@@ -580,8 +587,9 @@ private fun QuickActionCard(
                 )
                 Text(
                     text = subtitle,
-                    fontSize = 10.sp,
-                    color = NutriSlate600
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = NutriSlate800
                 )
             }
         }

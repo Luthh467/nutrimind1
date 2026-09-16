@@ -219,7 +219,8 @@ fun UksDashboardScreen(
                                 Text(
                                     text = "Terdapat ${needingReminder.size} siswa yang belum melakukan pemantauan berkala minggu ini.",
                                     fontSize = 11.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate800
                                 )
                             }
                         }
@@ -235,38 +236,72 @@ fun UksDashboardScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .testTag("uks_search_student_input"),
-                            placeholder = { Text("Cari ID Siswa atau Nama...", fontSize = 12.sp) },
-                            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = NutriSlate400) },
+                            placeholder = { Text("Cari ID Siswa atau Nama...", fontSize = 12.sp, color = NutriSlate700) },
+                            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = NutriSlate700) },
                             singleLine = true,
-                            shape = RoundedCornerShape(12.dp)
+                            shape = RoundedCornerShape(12.dp),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = NutriGreenPrimary,
+                                unfocusedBorderColor = NutriSlate300
+                            )
                         )
 
                         // Filters row: Class & Risk
-                        Text(text = "Filter Kategori Risiko:", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate600)
+                        Text(text = "Filter Kategori Risiko:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = NutriSlate800)
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             items(listOf("Semua", "Risiko Rendah", "Perlu Perhatian", "Risiko Tinggi")) { rf ->
+                                val isSel = selectedRiskFilter == rf
                                 FilterChip(
-                                    selected = selectedRiskFilter == rf,
+                                    selected = isSel,
                                     onClick = { selectedRiskFilter = rf },
-                                    label = { Text(rf, fontSize = 10.sp) },
+                                    label = {
+                                        Text(
+                                            text = rf,
+                                            fontSize = 10.sp,
+                                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                            color = if (isSel) NutriTealDark else NutriSlate800
+                                        )
+                                    },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = NutriTealLight,
-                                        selectedLabelColor = NutriTealDark
+                                        selectedLabelColor = NutriTealDark,
+                                        containerColor = NutriSlate50,
+                                        labelColor = NutriSlate800
+                                    ),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSel,
+                                        borderColor = if (isSel) NutriTealPrimary else NutriSlate200
                                     )
                                 )
                             }
                         }
 
-                        Text(text = "Filter Kelas:", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate600)
+                        Text(text = "Filter Kelas:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = NutriSlate800)
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             items(listOf("Semua", "X", "XI", "XII")) { cl ->
+                                val isSel = selectedClassFilter == cl
                                 FilterChip(
-                                    selected = selectedClassFilter == cl,
+                                    selected = isSel,
                                     onClick = { selectedClassFilter = cl },
-                                    label = { Text(cl, fontSize = 10.sp) },
+                                    label = {
+                                        Text(
+                                            text = cl,
+                                            fontSize = 10.sp,
+                                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                            color = if (isSel) NutriGreenDark else NutriSlate800
+                                        )
+                                    },
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = NutriGreenLight,
-                                        selectedLabelColor = NutriGreenDark
+                                        selectedLabelColor = NutriGreenDark,
+                                        containerColor = NutriSlate50,
+                                        labelColor = NutriSlate800
+                                    ),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSel,
+                                        borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                                     )
                                 )
                             }
@@ -308,18 +343,19 @@ fun UksDashboardScreen(
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Column {
                                         Text(text = student.name, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = NutriSlate900)
-                                        Text(text = "${student.id} • ${student.grade} • ${student.age} th", fontSize = 11.sp, color = NutriSlate600)
+                                        Text(text = "${student.id} • ${student.grade} • ${student.age} th", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                                     }
                                 }
 
                                 if (latest != null) {
                                     RiskBadge(riskCategory = latest.riskCategory)
                                 } else {
-                                    Surface(shape = RoundedCornerShape(12.dp), color = NutriSlate100) {
+                                    Surface(shape = RoundedCornerShape(12.dp), color = NutriSlate100, border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200)) {
                                         Text(
                                             text = "Belum Ada Data",
                                             fontSize = 10.sp,
-                                            color = NutriSlate600,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = NutriSlate800,
                                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                         )
                                     }
@@ -338,16 +374,17 @@ fun UksDashboardScreen(
                                         Text(
                                             text = "Status: ${latest.bmiCategory} (IMT: ${latest.bmi}${if (latest.zScore != 0f) ", Z: ${latest.zScore} SD" else ""})",
                                             fontSize = 11.sp,
-                                            fontWeight = FontWeight.SemiBold,
+                                            fontWeight = FontWeight.Bold,
                                             color = NutriGreenDark
                                         )
                                         Text(
                                             text = "Terakhir dicek: ${latest.date} • Kemenkes RI IMT/U",
                                             fontSize = 10.sp,
-                                            color = NutriSlate400
+                                            fontWeight = FontWeight.Medium,
+                                            color = NutriSlate700
                                         )
                                     } else {
-                                        Text(text = "Perlu diingatkan untuk cek gizi", fontSize = 11.sp, color = NutriAmber)
+                                        Text(text = "Perlu diingatkan untuk cek gizi", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = NutriAmberDark)
                                     }
                                 }
 
@@ -357,7 +394,7 @@ fun UksDashboardScreen(
                                     colors = ButtonDefaults.buttonColors(containerColor = NutriTealDark),
                                     contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
                                 ) {
-                                    Text("Detail & Tindak Lanjut", fontSize = 10.sp)
+                                    Text("Detail & Tindak Lanjut", fontSize = 10.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }
@@ -386,7 +423,7 @@ fun UksDashboardScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Column {
                         Text(text = student.name, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = NutriSlate900)
-                        Text(text = "${student.id} • ${student.grade} • NISN: ${student.studentIdNumber}", fontSize = 11.sp, color = NutriSlate600)
+                        Text(text = "${student.id} • ${student.grade} • NISN: ${student.studentIdNumber}", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                     }
                 }
             },
@@ -399,19 +436,20 @@ fun UksDashboardScreen(
                         Surface(
                             shape = RoundedCornerShape(10.dp),
                             color = NutriSlate100,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(text = "Status Gizi Terkini (Standar Kemenkes RI):", fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                                Text(text = "BB: ${latest.weightKg} kg | TB: ${latest.heightCm} cm | IMT: ${latest.bmi} kg/m²", fontSize = 11.sp)
-                                Text(text = "Z-Score IMT/U: ${if (latest.zScore != 0f) "${latest.zScore} SD" else "Normal"} • ${latest.standardReference}", fontSize = 11.sp, color = NutriTealDark, fontWeight = FontWeight.SemiBold)
-                                Text(text = "Kategori: ${latest.bmiCategory} • ${latest.riskCategory}", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriGreenDark)
-                                Text(text = "Kebiasaan: Sarapan: ${latest.breakfastHabit} • Sayur: ${latest.vegetableIntake} • Buah: ${latest.fruitIntake}", fontSize = 11.sp, color = NutriSlate700)
-                                Text(text = "Faktor Risiko: ${latest.factorsToNote}", fontSize = 11.sp, color = NutriSlate600)
+                                Text(text = "Status Gizi Terkini (Standar Kemenkes RI):", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = NutriSlate900)
+                                Text(text = "BB: ${latest.weightKg} kg | TB: ${latest.heightCm} cm | IMT: ${latest.bmi} kg/m²", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate900)
+                                Text(text = "Z-Score IMT/U: ${if (latest.zScore != 0f) "${latest.zScore} SD" else "Normal"} • ${latest.standardReference}", fontSize = 11.sp, color = NutriTealDark, fontWeight = FontWeight.Bold)
+                                Text(text = "Kategori: ${latest.bmiCategory} • ${latest.riskCategory}", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = NutriGreenDark)
+                                Text(text = "Kebiasaan: Sarapan: ${latest.breakfastHabit} • Sayur: ${latest.vegetableIntake} • Buah: ${latest.fruitIntake}", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
+                                Text(text = "Faktor Risiko: ${latest.factorsToNote}", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                             }
                         }
                     } else {
-                        Text("Siswa ini belum pernah melakukan cek gizi.", fontSize = 12.sp, color = NutriSlate600)
+                        Text("Siswa ini belum pernah melakukan cek gizi.", fontSize = 12.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                     }
 
                     // Form Catat Tindak Lanjut UKS
@@ -425,7 +463,7 @@ fun UksDashboardScreen(
                     OutlinedTextField(
                         value = followUpNoteText,
                         onValueChange = { followUpNoteText = it },
-                        placeholder = { Text("misal: Diberikan edukasi sarapan bergizi seimbang & tablet tambah darah (TTD)", fontSize = 11.sp) },
+                        placeholder = { Text("misal: Diberikan edukasi sarapan bergizi seimbang & tablet tambah darah (TTD)", fontSize = 11.sp, color = NutriSlate700) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("follow_up_note_input"),
@@ -509,15 +547,18 @@ fun UksDashboardScreen(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("Salin data teks rekap berikut untuk arsip laporan madrasah atau Puskesmas:", fontSize = 12.sp, color = NutriSlate600)
+                    Text("Salin data teks rekap berikut untuk arsip laporan madrasah atau Puskesmas:", fontSize = 12.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                     Surface(
                         shape = RoundedCornerShape(8.dp),
                         color = NutriSlate100,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
                             text = exportSummary,
                             fontSize = 10.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate900,
                             fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
                             modifier = Modifier.padding(10.dp)
                         )

@@ -99,7 +99,7 @@ fun AuthScreen(
         Text(
             text = "Pantau kondisi gizi, kenali makananmu, dan bangun kebiasaan sehat.",
             style = MaterialTheme.typography.bodySmall,
-            color = NutriSlate600,
+            color = NutriSlate800,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 24.dp)
         )
@@ -129,14 +129,14 @@ fun AuthScreen(
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (selectedRoleTab == 0) NutriGreenPrimary else Color.Transparent,
-                        contentColor = if (selectedRoleTab == 0) Color.White else NutriSlate600
+                        contentColor = if (selectedRoleTab == 0) Color.White else NutriSlate800
                     ),
                     elevation = if (selectedRoleTab == 0) ButtonDefaults.buttonElevation(defaultElevation = 2.dp) else null
                 ) {
                     Text(
                         text = "Masuk sebagai Siswa",
                         fontSize = 12.sp,
-                        fontWeight = if (selectedRoleTab == 0) FontWeight.Bold else FontWeight.Normal,
+                        fontWeight = if (selectedRoleTab == 0) FontWeight.Bold else FontWeight.SemiBold,
                         maxLines = 1
                     )
                 }
@@ -152,14 +152,14 @@ fun AuthScreen(
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (selectedRoleTab == 1) NutriTealDark else Color.Transparent,
-                        contentColor = if (selectedRoleTab == 1) Color.White else NutriSlate600
+                        contentColor = if (selectedRoleTab == 1) Color.White else NutriSlate800
                     ),
                     elevation = if (selectedRoleTab == 1) ButtonDefaults.buttonElevation(defaultElevation = 2.dp) else null
                 ) {
                     Text(
                         text = "Masuk sebagai Petugas UKS",
                         fontSize = 12.sp,
-                        fontWeight = if (selectedRoleTab == 1) FontWeight.Bold else FontWeight.Normal,
+                        fontWeight = if (selectedRoleTab == 1) FontWeight.Bold else FontWeight.SemiBold,
                         maxLines = 1
                     )
                 }
@@ -219,7 +219,7 @@ fun AuthScreen(
                     Text(
                         text = "Masuk dengan akun Google untuk memulai skrining dan memantau status gizimu.",
                         style = MaterialTheme.typography.bodySmall,
-                        color = NutriSlate600,
+                        color = NutriSlate800,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(vertical = 4.dp)
                     )
@@ -292,7 +292,8 @@ fun AuthScreen(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp),
-                        color = NutriSlate100
+                        color = NutriSlate100,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200)
                     ) {
                         Row(
                             modifier = Modifier.padding(10.dp),
@@ -301,14 +302,15 @@ fun AuthScreen(
                             Icon(
                                 imageVector = Icons.Default.Security,
                                 contentDescription = null,
-                                tint = NutriSlate600,
+                                tint = NutriSlate700,
                                 modifier = Modifier.size(16.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = "Gunakan akun Google milikmu sendiri. Jangan menggunakan akun orang lain.",
                                 fontSize = 11.sp,
-                                color = NutriSlate600,
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate800,
                                 lineHeight = 15.sp
                             )
                         }
@@ -321,7 +323,7 @@ fun AuthScreen(
                         text = "Lupa atau mengalami masalah saat login?",
                         color = NutriTealDark,
                         fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .clickable { showHelpDialog = true }
                             .padding(4.dp)
@@ -362,7 +364,7 @@ fun AuthScreen(
                     Text(
                         text = "Akses pemantauan gizi dan tindak lanjut kesehatan siswa madrasah.",
                         style = MaterialTheme.typography.bodySmall,
-                        color = NutriSlate600,
+                        color = NutriSlate800,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(vertical = 4.dp)
                     )
@@ -375,8 +377,8 @@ fun AuthScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("uks_email_input"),
-                        label = { Text("Email Petugas UKS") },
-                        placeholder = { Text("uks@madrasah.sch.id") },
+                        label = { Text("Email Petugas UKS", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
+                        placeholder = { Text("uks@madrasah.sch.id", color = NutriSlate600) },
                         leadingIcon = {
                             Icon(Icons.Default.Email, contentDescription = null, tint = NutriTealDark)
                         },
@@ -392,7 +394,7 @@ fun AuthScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("uks_password_input"),
-                        label = { Text("Kata Sandi") },
+                        label = { Text("Kata Sandi", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
                         leadingIcon = {
                             Icon(Icons.Default.VpnKey, contentDescription = null, tint = NutriTealDark)
                         },
@@ -495,8 +497,9 @@ fun AuthScreen(
                                 )
                                 Text(
                                     text = "Email: uks@madrasah.sch.id | Sandi: uks12345",
-                                    fontSize = 10.sp,
-                                    color = NutriSlate600
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = NutriSlate800
                                 )
                             }
                         }
@@ -539,7 +542,8 @@ fun AuthScreen(
                     Text(
                         text = "Pilih akun Google terdaftar milikmu untuk melanjutkan:",
                         fontSize = 13.sp,
-                        color = NutriSlate600
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate800
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
@@ -559,7 +563,8 @@ fun AuthScreen(
                                     viewModel.loginAsGoogleStudent(email, name, isCreatingNewStudentAccount)
                                 },
                             shape = RoundedCornerShape(10.dp),
-                            color = NutriSlate100
+                            color = NutriSlate100,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200)
                         ) {
                             Row(
                                 modifier = Modifier.padding(10.dp),
@@ -580,8 +585,8 @@ fun AuthScreen(
                                 }
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Column {
-                                    Text(text = name, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
-                                    Text(text = "$email • $grade", fontSize = 11.sp, color = NutriSlate600)
+                                    Text(text = name, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = NutriSlate900)
+                                    Text(text = "$email • $grade", fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate800)
                                 }
                             }
                         }

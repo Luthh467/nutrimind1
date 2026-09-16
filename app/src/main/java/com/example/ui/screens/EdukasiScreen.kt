@@ -100,12 +100,12 @@ fun EdukasiScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("search_articles_input"),
-                    placeholder = { Text("Cari topik gizi, sarapan, buah...", fontSize = 13.sp) },
-                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = NutriSlate400) },
+                    placeholder = { Text("Cari topik gizi, sarapan, buah...", fontSize = 13.sp, color = NutriSlate700) },
+                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = NutriSlate700) },
                     trailingIcon = if (searchQuery.isNotEmpty()) {
                         {
                             IconButton(onClick = { searchQuery = "" }) {
-                                Icon(Icons.Default.Clear, contentDescription = null, tint = NutriSlate400)
+                                Icon(Icons.Default.Clear, contentDescription = null, tint = NutriSlate700)
                             }
                         }
                     } else null,
@@ -113,7 +113,7 @@ fun EdukasiScreen(
                     shape = RoundedCornerShape(24.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = NutriGreenPrimary,
-                        unfocusedBorderColor = NutriSlate400
+                        unfocusedBorderColor = NutriSlate300
                     )
                 )
             }
@@ -130,10 +130,24 @@ fun EdukasiScreen(
                     FilterChip(
                         selected = isSel,
                         onClick = { selectedCategory = cat },
-                        label = { Text(cat, fontSize = 11.sp, fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal) },
+                        label = {
+                            Text(
+                                text = cat,
+                                fontSize = 11.sp,
+                                fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                color = if (isSel) NutriGreenDark else NutriSlate800
+                            )
+                        },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = NutriGreenLight,
-                            selectedLabelColor = NutriGreenDark
+                            selectedLabelColor = NutriGreenDark,
+                            containerColor = NutriSlate50,
+                            labelColor = NutriSlate800
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSel,
+                            borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                         )
                     )
                 }
@@ -159,14 +173,14 @@ fun EdukasiScreen(
                                 .fillMaxWidth()
                                 .testTag("rekomendasi_edukasi_pribadi"),
                             shape = RoundedCornerShape(12.dp),
-                            color = NutriAmberLight.copy(alpha = 0.7f),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriAmber.copy(alpha = 0.4f))
+                            color = NutriAmberLight,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriAmberDark.copy(alpha = 0.5f))
                         ) {
                             Row(
                                 modifier = Modifier.padding(12.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(Icons.Default.Recommend, contentDescription = null, tint = NutriAmber)
+                                Icon(Icons.Default.Recommend, contentDescription = null, tint = NutriAmberDark)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column {
                                     Text(
@@ -178,7 +192,8 @@ fun EdukasiScreen(
                                     Text(
                                         text = "Prioritaskan membaca panduan Sarapan Pagi, Konsumsi Buah & Sayur, serta Pembatasan Gula Garam Lemak (GGL).",
                                         fontSize = 11.sp,
-                                        color = NutriSlate800
+                                        fontWeight = FontWeight.Medium,
+                                        color = NutriSlate900
                                     )
                                 }
                             }
@@ -216,7 +231,7 @@ fun EdukasiScreen(
                                 }
 
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(text = art.readTime, fontSize = 10.sp, color = NutriSlate400)
+                                    Text(text = art.readTime, fontSize = 11.sp, fontWeight = FontWeight.Medium, color = NutriSlate700)
                                     Spacer(modifier = Modifier.width(6.dp))
                                     IconButton(
                                         onClick = { viewModel.toggleArticleFavorite(art.id, !art.isFavorite) },
@@ -225,7 +240,7 @@ fun EdukasiScreen(
                                         Icon(
                                             imageVector = if (art.isFavorite) Icons.Outlined.BookmarkAdded else Icons.Outlined.BookmarkAdd,
                                             contentDescription = "Simpan",
-                                            tint = if (art.isFavorite) NutriAmber else NutriSlate400,
+                                            tint = if (art.isFavorite) NutriAmberDark else NutriSlate700,
                                             modifier = Modifier.size(20.dp)
                                         )
                                     }
@@ -246,7 +261,8 @@ fun EdukasiScreen(
                             Text(
                                 text = art.summary,
                                 fontSize = 12.sp,
-                                color = NutriSlate600,
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate800,
                                 lineHeight = 16.sp
                             )
                         }
@@ -288,12 +304,13 @@ fun EdukasiScreen(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Text(text = art.content, fontSize = 13.sp, color = NutriSlate800, lineHeight = 19.sp)
+                    Text(text = art.content, fontSize = 13.sp, color = NutriSlate900, lineHeight = 19.sp)
                     HorizontalDivider()
                     Text(
                         text = "Sumber: Panduan Gizi Remaja Kemenkes RI & Konsep NutriMind AI Madrasah.",
                         fontSize = 11.sp,
-                        color = NutriSlate400,
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate700,
                         fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
                     )
                 }

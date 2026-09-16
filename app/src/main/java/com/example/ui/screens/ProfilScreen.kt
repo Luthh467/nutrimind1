@@ -98,7 +98,8 @@ fun ProfilScreen(
                     Text(
                         text = currentStudent?.email ?: "email@madrasah.sch.id",
                         fontSize = 12.sp,
-                        color = NutriSlate600
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate800
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -146,6 +147,7 @@ fun ProfilScreen(
                     Text(
                         text = "Kerahasiaan Data Terjamin: Data skrining dan antropometri hanya dapat dilihat oleh kamu dan pembina/petugas UKS madrasah yang berwenang.",
                         fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold,
                         color = NutriTealDark,
                         lineHeight = 16.sp
                     )
@@ -182,7 +184,7 @@ private fun ProfileInfoRow(label: String, value: String) {
             .padding(vertical = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label, fontSize = 12.sp, color = NutriSlate600)
-        Text(text = value, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate900)
+        Text(text = label, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate800)
+        Text(text = value, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = NutriSlate900)
     }
 }

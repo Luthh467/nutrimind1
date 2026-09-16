@@ -99,8 +99,9 @@ fun AiChatbotDialog(
                         Text(
                             text = "Edukasi Gizi & Pola Hidup Siswa Madrasah",
                             style = MaterialTheme.typography.bodySmall,
-                            color = NutriGreenLight,
-                            fontSize = 11.sp
+                            color = Color.White.copy(alpha = 0.9f),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium
                         )
                     }
                     IconButton(
@@ -125,7 +126,8 @@ fun AiChatbotDialog(
                     Text(
                         text = "NutriMind AI adalah asisten edukasi & skrining gizi, bukan alat diagnosis medis.",
                         fontSize = 11.sp,
-                        color = NutriSlate800,
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate900,
                         lineHeight = 15.sp
                     )
                 }
@@ -181,13 +183,15 @@ fun AiChatbotDialog(
                                     text = msg.text,
                                     color = if (isUser) Color.White else NutriSlate900,
                                     fontSize = 14.sp,
+                                    fontWeight = if (isUser) FontWeight.Normal else FontWeight.Medium,
                                     lineHeight = 20.sp
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
                                     text = msg.time,
-                                    color = if (isUser) NutriGreenLight.copy(alpha = 0.8f) else NutriSlate400,
+                                    color = if (isUser) Color.White.copy(alpha = 0.85f) else NutriSlate700,
                                     fontSize = 10.sp,
+                                    fontWeight = FontWeight.Medium,
                                     modifier = Modifier.align(Alignment.End)
                                 )
                             }
@@ -209,7 +213,8 @@ fun AiChatbotDialog(
                                 Text(
                                     text = "NutriMind AI sedang berpikir...",
                                     fontSize = 12.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = NutriSlate800
                                 )
                             }
                         }
@@ -237,7 +242,7 @@ fun AiChatbotDialog(
                                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
                                 fontSize = 11.sp,
                                 color = NutriTealDark,
-                                fontWeight = FontWeight.Medium
+                                fontWeight = FontWeight.SemiBold
                             )
                         }
                     }
@@ -256,7 +261,7 @@ fun AiChatbotDialog(
                         modifier = Modifier
                             .weight(1f)
                             .testTag("chat_input_field"),
-                        placeholder = { Text("Tanyakan tentang gizi & makanan...", fontSize = 13.sp) },
+                        placeholder = { Text("Tanyakan tentang gizi & makanan...", fontSize = 13.sp, color = NutriSlate700) },
                         maxLines = 3,
                         shape = RoundedCornerShape(24.dp),
                         colors = OutlinedTextFieldDefaults.colors(

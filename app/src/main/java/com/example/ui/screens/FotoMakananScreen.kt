@@ -426,8 +426,8 @@ fun FotoMakananScreen(
                     Text(
                         text = "Atau coba contoh menu madrasah untuk simulasi analisis AI:",
                         fontSize = 11.sp,
-                        color = NutriSlate600,
-                        fontWeight = FontWeight.Medium
+                        color = NutriSlate800,
+                        fontWeight = FontWeight.SemiBold
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))
@@ -457,11 +457,26 @@ fun FotoMakananScreen(
                                         cameraNoticeMessage = null
                                         viewModel.analyzeFoodImage(null, preset)
                                     },
-                                    label = { Text(preset, fontSize = 10.sp, maxLines = 1) },
+                                    label = {
+                                        Text(
+                                            text = preset,
+                                            fontSize = 10.sp,
+                                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                            color = if (isSel) NutriTealDark else NutriSlate800,
+                                            maxLines = 1
+                                        )
+                                    },
                                     modifier = Modifier.weight(1f),
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = NutriTealLight,
-                                        selectedLabelColor = NutriTealDark
+                                        selectedLabelColor = NutriTealDark,
+                                        containerColor = NutriSlate50,
+                                        labelColor = NutriSlate800
+                                    ),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSel,
+                                        borderColor = if (isSel) NutriTealPrimary else NutriSlate200
                                     )
                                 )
                             }
@@ -481,11 +496,26 @@ fun FotoMakananScreen(
                                         cameraNoticeMessage = null
                                         viewModel.analyzeFoodImage(null, preset)
                                     },
-                                    label = { Text(preset, fontSize = 10.sp, maxLines = 1) },
+                                    label = {
+                                        Text(
+                                            text = preset,
+                                            fontSize = 10.sp,
+                                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                            color = if (isSel) NutriTealDark else NutriSlate800,
+                                            maxLines = 1
+                                        )
+                                    },
                                     modifier = Modifier.weight(1f),
                                     colors = FilterChipDefaults.filterChipColors(
                                         selectedContainerColor = NutriTealLight,
-                                        selectedLabelColor = NutriTealDark
+                                        selectedLabelColor = NutriTealDark,
+                                        containerColor = NutriSlate50,
+                                        labelColor = NutriSlate800
+                                    ),
+                                    border = FilterChipDefaults.filterChipBorder(
+                                        enabled = true,
+                                        selected = isSel,
+                                        borderColor = if (isSel) NutriTealPrimary else NutriSlate200
                                     )
                                 )
                             }
@@ -526,7 +556,7 @@ fun FotoMakananScreen(
                                     text = "Estimasi Kalori: ${analysis.estimatedCalories}",
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 12.sp,
-                                    color = NutriAmber
+                                    color = NutriAmberDark
                                 )
                             }
 
@@ -566,6 +596,7 @@ fun FotoMakananScreen(
                         Surface(
                             shape = RoundedCornerShape(10.dp),
                             color = NutriSlate100,
+                            border = BorderStroke(1.dp, NutriSlate200),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(
@@ -579,7 +610,7 @@ fun FotoMakananScreen(
                                         text = "Estimasi Proporsi Makronutrien:",
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.SemiBold,
-                                        color = NutriSlate700
+                                        color = NutriSlate800
                                     )
                                     Text(
                                         text = analysis.macronutrients,
@@ -598,7 +629,7 @@ fun FotoMakananScreen(
                             text = "1. Hasil Identifikasi Makanan (Gemini Vision)",
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
-                            color = NutriSlate800
+                            color = NutriSlate900
                         )
 
                         AnalysisRow(
@@ -621,14 +652,14 @@ fun FotoMakananScreen(
                             text = "2. Estimasi Keseimbangan Komponen Gizi",
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
-                            color = NutriSlate800
+                            color = NutriSlate900
                         )
 
                         AnalysisRow(
                             icon = Icons.Default.Grain,
                             label = "Sumber Karbohidrat",
                             value = analysis.carbSource,
-                            tint = NutriAmber
+                            tint = NutriAmberDark
                         )
                         AnalysisRow(
                             icon = Icons.Default.Egg,
@@ -672,7 +703,8 @@ fun FotoMakananScreen(
                                 Text(
                                     text = analysis.balanceEvaluation,
                                     fontSize = 12.sp,
-                                    color = NutriSlate800,
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate900,
                                     lineHeight = 17.sp
                                 )
 
@@ -682,7 +714,7 @@ fun FotoMakananScreen(
                                         Icon(
                                             Icons.Default.Lightbulb,
                                             contentDescription = null,
-                                            tint = NutriAmber,
+                                            tint = NutriAmberDark,
                                             modifier = Modifier.size(15.dp)
                                         )
                                         Spacer(modifier = Modifier.width(6.dp))
@@ -690,7 +722,7 @@ fun FotoMakananScreen(
                                             text = "Tips: ${analysis.improvementTips}",
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Medium,
-                                            color = NutriSlate700,
+                                            color = NutriSlate800,
                                             lineHeight = 15.sp
                                         )
                                     }
@@ -701,7 +733,8 @@ fun FotoMakananScreen(
                         // Mandatory Note
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = NutriAmberLight.copy(alpha = 0.5f),
+                            color = NutriAmberLight,
+                            border = BorderStroke(1.dp, NutriAmberDark.copy(alpha = 0.4f)),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(
@@ -711,14 +744,15 @@ fun FotoMakananScreen(
                                 Icon(
                                     Icons.Default.Info,
                                     contentDescription = null,
-                                    tint = NutriAmber,
+                                    tint = NutriAmberDark,
                                     modifier = Modifier.size(14.dp)
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
                                     text = "“${analysis.educationalNote}”",
                                     fontSize = 11.sp,
-                                    color = NutriSlate700,
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate900,
                                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
                                 )
                             }
@@ -784,8 +818,8 @@ private fun AnalysisRow(
         }
         Spacer(modifier = Modifier.width(10.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = label, fontWeight = FontWeight.SemiBold, fontSize = 11.sp, color = NutriSlate600)
-            Text(text = value, fontSize = 12.sp, color = NutriSlate900, lineHeight = 16.sp)
+            Text(text = label, fontWeight = FontWeight.Bold, fontSize = 11.sp, color = NutriSlate800)
+            Text(text = value, fontSize = 12.sp, fontWeight = FontWeight.Medium, color = NutriSlate900, lineHeight = 16.sp)
         }
     }
 }

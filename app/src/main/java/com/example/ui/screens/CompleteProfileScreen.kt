@@ -118,9 +118,15 @@ fun CompleteProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("profile_name_input"),
-                        label = { Text("Nama atau Inisial Siswa") },
-                        placeholder = { Text("misal: Ahmad S. atau Ahmad Syahrul") },
-                        leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+                        label = { Text("Nama atau Inisial Siswa", fontWeight = FontWeight.SemiBold) },
+                        placeholder = { Text("misal: Ahmad S. atau Ahmad Syahrul", color = NutriSlate700) },
+                        leadingIcon = { Icon(Icons.Default.Person, contentDescription = null, tint = NutriSlate700) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = NutriGreenPrimary,
+                            unfocusedBorderColor = NutriSlate300,
+                            focusedLabelColor = NutriGreenDark,
+                            unfocusedLabelColor = NutriSlate800
+                        ),
                         singleLine = true
                     )
 
@@ -131,9 +137,15 @@ fun CompleteProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("profile_nisn_input"),
-                        label = { Text("Nomor Identitas Siswa / NISN") },
-                        placeholder = { Text("misal: 0078129841") },
-                        leadingIcon = { Icon(Icons.Default.Badge, contentDescription = null) },
+                        label = { Text("Nomor Identitas Siswa / NISN", fontWeight = FontWeight.SemiBold) },
+                        placeholder = { Text("misal: 0078129841", color = NutriSlate700) },
+                        leadingIcon = { Icon(Icons.Default.Badge, contentDescription = null, tint = NutriSlate700) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = NutriGreenPrimary,
+                            unfocusedBorderColor = NutriSlate300,
+                            focusedLabelColor = NutriGreenDark,
+                            unfocusedLabelColor = NutriSlate800
+                        ),
                         singleLine = true
                     )
 
@@ -144,8 +156,14 @@ fun CompleteProfileScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("profile_age_input"),
-                        label = { Text("Umur (Tahun)") },
-                        placeholder = { Text("misal: 16") },
+                        label = { Text("Umur (Tahun)", fontWeight = FontWeight.SemiBold) },
+                        placeholder = { Text("misal: 16", color = NutriSlate700) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = NutriGreenPrimary,
+                            unfocusedBorderColor = NutriSlate300,
+                            focusedLabelColor = NutriGreenDark,
+                            unfocusedLabelColor = NutriSlate800
+                        ),
                         singleLine = true
                     )
 
@@ -153,8 +171,8 @@ fun CompleteProfileScreen(
                     Text(
                         text = "Jenis Kelamin",
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = NutriSlate800
+                        fontWeight = FontWeight.Bold,
+                        color = NutriSlate900
                     )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -165,13 +183,26 @@ fun CompleteProfileScreen(
                             FilterChip(
                                 selected = isSelected,
                                 onClick = { gender = g },
-                                label = { Text(g) },
+                                label = {
+                                    Text(
+                                        text = g,
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
+                                        color = if (isSelected) NutriGreenDark else NutriSlate800
+                                    )
+                                },
                                 leadingIcon = if (isSelected) {
-                                    { Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(16.dp)) }
+                                    { Icon(Icons.Default.Check, contentDescription = null, tint = NutriGreenDark, modifier = Modifier.size(16.dp)) }
                                 } else null,
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = NutriGreenLight,
-                                    selectedLabelColor = NutriGreenDark
+                                    selectedLabelColor = NutriGreenDark,
+                                    containerColor = NutriSlate50,
+                                    labelColor = NutriSlate800
+                                ),
+                                border = FilterChipDefaults.filterChipBorder(
+                                    enabled = true,
+                                    selected = isSelected,
+                                    borderColor = if (isSelected) NutriGreenPrimary else NutriSlate200
                                 )
                             )
                         }
@@ -181,8 +212,8 @@ fun CompleteProfileScreen(
                     Text(
                         text = "Kelas di Madrasah",
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = NutriSlate800
+                        fontWeight = FontWeight.Bold,
+                        color = NutriSlate900
                     )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -190,13 +221,28 @@ fun CompleteProfileScreen(
                     ) {
                         // Quick selection chips
                         gradeOptions.take(4).forEach { opt ->
+                            val isSelected = grade == opt
                             FilterChip(
-                                selected = grade == opt,
+                                selected = isSelected,
                                 onClick = { grade = opt },
-                                label = { Text(opt, fontSize = 11.sp) },
+                                label = {
+                                    Text(
+                                        text = opt,
+                                        fontSize = 11.sp,
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
+                                        color = if (isSelected) NutriGreenDark else NutriSlate800
+                                    )
+                                },
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = NutriGreenLight,
-                                    selectedLabelColor = NutriGreenDark
+                                    selectedLabelColor = NutriGreenDark,
+                                    containerColor = NutriSlate50,
+                                    labelColor = NutriSlate800
+                                ),
+                                border = FilterChipDefaults.filterChipBorder(
+                                    enabled = true,
+                                    selected = isSelected,
+                                    borderColor = if (isSelected) NutriGreenPrimary else NutriSlate200
                                 )
                             )
                         }
@@ -206,13 +252,28 @@ fun CompleteProfileScreen(
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         gradeOptions.drop(4).forEach { opt ->
+                            val isSelected = grade == opt
                             FilterChip(
-                                selected = grade == opt,
+                                selected = isSelected,
                                 onClick = { grade = opt },
-                                label = { Text(opt, fontSize = 11.sp) },
+                                label = {
+                                    Text(
+                                        text = opt,
+                                        fontSize = 11.sp,
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
+                                        color = if (isSelected) NutriGreenDark else NutriSlate800
+                                    )
+                                },
                                 colors = FilterChipDefaults.filterChipColors(
                                     selectedContainerColor = NutriGreenLight,
-                                    selectedLabelColor = NutriGreenDark
+                                    selectedLabelColor = NutriGreenDark,
+                                    containerColor = NutriSlate50,
+                                    labelColor = NutriSlate800
+                                ),
+                                border = FilterChipDefaults.filterChipBorder(
+                                    enabled = true,
+                                    selected = isSelected,
+                                    borderColor = if (isSelected) NutriGreenPrimary else NutriSlate200
                                 )
                             )
                         }
@@ -236,7 +297,8 @@ fun CompleteProfileScreen(
                         Text(
                             text = "Saya menyetujui penggunaan aplikasi NutriMind AI untuk pemantauan gizi siswa madrasah.",
                             style = MaterialTheme.typography.bodySmall,
-                            color = NutriSlate800,
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate900,
                             lineHeight = 16.sp
                         )
                     }

@@ -124,7 +124,8 @@ fun CekGiziScreen(
                         Text(
                             text = "Umur: ${currentStudent?.age ?: 16} th • Jenis Kelamin: ${currentStudent?.gender ?: "Laki-laki"} • ${currentStudent?.grade ?: "MA"}",
                             fontSize = 11.sp,
-                            color = NutriSlate600
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate700
                         )
                     }
                 }
@@ -162,7 +163,7 @@ fun CekGiziScreen(
                             modifier = Modifier
                                 .weight(1f)
                                 .testTag("weight_input_field"),
-                            label = { Text("Berat Badan (kg)") },
+                            label = { Text("Berat Badan (kg)", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
                             singleLine = true
                         )
                         OutlinedTextField(
@@ -171,7 +172,7 @@ fun CekGiziScreen(
                             modifier = Modifier
                                 .weight(1f)
                                 .testTag("height_input_field"),
-                            label = { Text("Tinggi Badan (cm)") },
+                            label = { Text("Tinggi Badan (cm)", color = NutriSlate800, fontWeight = FontWeight.SemiBold) },
                             singleLine = true
                         )
                     }
@@ -180,7 +181,8 @@ fun CekGiziScreen(
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        color = NutriSlate100
+                        color = NutriSlate100,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200)
                     ) {
                         Column(
                             modifier = Modifier.padding(12.dp),
@@ -195,7 +197,8 @@ fun CekGiziScreen(
                                     Text(
                                         text = "Perkiraan Indeks Massa Tubuh (IMT):",
                                         fontSize = 11.sp,
-                                        color = NutriSlate600
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = NutriSlate800
                                     )
                                     Text(
                                         text = "${liveImtu.bmi} kg/m²",
@@ -218,7 +221,7 @@ fun CekGiziScreen(
                                         fontWeight = FontWeight.Bold,
                                         color = when (liveImtu.statusColorType) {
                                             "DANGER" -> NutriRedRisk
-                                            "WARNING" -> NutriAmber
+                                            "WARNING" -> NutriAmberDark
                                             else -> NutriGreenDark
                                         },
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -227,8 +230,9 @@ fun CekGiziScreen(
                             }
                             Text(
                                 text = "Standar Kemenkes RI (Permenkes No. 2/2020) IMT/U usia ${age} th. Rentang Normal: ${liveImtu.normalRangeText}",
-                                fontSize = 10.sp,
-                                color = NutriSlate600
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = NutriSlate700
                             )
                         }
                     }
@@ -409,7 +413,8 @@ fun CekGiziScreen(
                                 Text(
                                     text = "Pemeriksaan: ${res.date}",
                                     fontSize = 11.sp,
-                                    color = NutriSlate400
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate700
                                 )
                             }
                             RiskBadge(riskCategory = res.riskCategory)
@@ -433,6 +438,7 @@ fun CekGiziScreen(
                         Surface(
                             shape = RoundedCornerShape(10.dp),
                             color = NutriSlate100,
+                            border = androidx.compose.foundation.BorderStroke(1.dp, NutriSlate200),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column(modifier = Modifier.padding(10.dp)) {
@@ -445,40 +451,43 @@ fun CekGiziScreen(
                                 Text(
                                     text = "Standar: ${res.standardReference}",
                                     fontSize = 11.sp,
-                                    color = NutriSlate600
+                                    fontWeight = FontWeight.Medium,
+                                    color = NutriSlate700
                                 )
                                 Text(
                                     text = "Kategori Pemantauan: ${res.riskCategory}",
                                     fontSize = 12.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    color = NutriSlate800
+                                    fontWeight = FontWeight.Bold,
+                                    color = NutriSlate900
                                 )
                             }
                         }
 
                         Text(
                             text = "Faktor yang Perlu Diperhatikan:",
-                            fontWeight = FontWeight.SemiBold,
+                            fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
-                            color = NutriSlate800
+                            color = NutriSlate900
                         )
                         Text(
                             text = res.factorsToNote,
                             fontSize = 12.sp,
-                            color = NutriSlate600,
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate800,
                             lineHeight = 16.sp
                         )
 
                         Text(
                             text = "Saran Edukasi NutriMind:",
-                            fontWeight = FontWeight.SemiBold,
+                            fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
-                            color = NutriSlate800
+                            color = NutriGreenDark
                         )
                         Text(
                             text = res.generalAdvice,
                             fontSize = 12.sp,
-                            color = NutriGreenDark,
+                            fontWeight = FontWeight.Medium,
+                            color = NutriSlate900,
                             lineHeight = 17.sp
                         )
                     }
@@ -512,18 +521,20 @@ fun CekGiziScreen(
                     Text(
                         text = "Rujukan: Standar Antropometri Kemenkes RI (Permenkes No. 2/2020) IMT/U",
                         fontSize = 11.sp,
-                        color = NutriSlate600
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate700
                     )
                     Text(
                         text = "Tingkat Risiko: ${res.riskCategory}",
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
-                        color = if (res.riskCategory == "Risiko Rendah") NutriGreenRisk else NutriAmber
+                        color = if (res.riskCategory == "Risiko Rendah") NutriGreenRisk else NutriAmberDark
                     )
                     Text(
                         text = res.generalAdvice,
                         fontSize = 12.sp,
-                        color = NutriSlate800
+                        fontWeight = FontWeight.Medium,
+                        color = NutriSlate900
                     )
                 }
             },
@@ -542,8 +553,8 @@ fun CekGiziScreen(
 @Composable
 private fun MetricItem(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = label, fontSize = 11.sp, color = NutriSlate600)
-        Text(text = value, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = NutriSlate900)
+        Text(text = label, fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = NutriSlate700)
+        Text(text = value, fontSize = 14.sp, fontWeight = FontWeight.ExtraBold, color = NutriSlate900)
     }
 }
 
@@ -558,8 +569,8 @@ private fun QuestionOptionGroup(
         Text(
             text = title,
             fontSize = 12.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = NutriSlate800
+            fontWeight = FontWeight.Bold,
+            color = NutriSlate900
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -570,11 +581,25 @@ private fun QuestionOptionGroup(
                 FilterChip(
                     selected = isSel,
                     onClick = { onSelect(opt) },
-                    label = { Text(opt, fontSize = 11.sp) },
+                    label = {
+                        Text(
+                            text = opt,
+                            fontSize = 11.sp,
+                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                            color = if (isSel) NutriGreenDark else NutriSlate800
+                        )
+                    },
                     modifier = Modifier.weight(1f),
                     colors = FilterChipDefaults.filterChipColors(
                         selectedContainerColor = NutriGreenLight,
-                        selectedLabelColor = NutriGreenDark
+                        selectedLabelColor = NutriGreenDark,
+                        containerColor = NutriSlate50,
+                        labelColor = NutriSlate800
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        enabled = true,
+                        selected = isSel,
+                        borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                     )
                 )
             }
@@ -589,11 +614,25 @@ private fun QuestionOptionGroup(
                     FilterChip(
                         selected = isSel,
                         onClick = { onSelect(opt) },
-                        label = { Text(opt, fontSize = 11.sp) },
+                        label = {
+                            Text(
+                                text = opt,
+                                fontSize = 11.sp,
+                                fontWeight = if (isSel) FontWeight.Bold else FontWeight.SemiBold,
+                                color = if (isSel) NutriGreenDark else NutriSlate800
+                            )
+                        },
                         modifier = Modifier.weight(1f),
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = NutriGreenLight,
-                            selectedLabelColor = NutriGreenDark
+                            selectedLabelColor = NutriGreenDark,
+                            containerColor = NutriSlate50,
+                            labelColor = NutriSlate800
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSel,
+                            borderColor = if (isSel) NutriGreenPrimary else NutriSlate200
                         )
                     )
                 }
