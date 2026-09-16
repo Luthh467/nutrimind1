@@ -1,0 +1,6 @@
+{
+  "name": "NutriMind AI",
+  "description": "Sistem deteksi dini dan pemantauan risiko masalah gizi siswa madrasah berbasis AI",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
